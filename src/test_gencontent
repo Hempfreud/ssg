@@ -1,0 +1,20 @@
+import unittest
+from gencontent import extract_title
+
+class TestExtractTitle(unittest.TestCase):
+    def test_extract_title_with_title(self):
+        markdown = "# My Title\n\nThis is some content."
+        title = extract_title(markdown)
+        self.assertEqual(title, "My Title")
+
+    def test_extract_title_without_title(self):
+        markdown = "This is some content without a title."
+        with self.assertRaises(ValueError):
+            extract_title(markdown)
+    def test_extract_title_with_multiple_titles(self):
+        markdown = "# First Title\n\n# Second Title\n\nContent here."
+        title = extract_title(markdown)
+        self.assertEqual(title, "First Title")
+
+if __name__ == "__main__":
+    unittest.main()
